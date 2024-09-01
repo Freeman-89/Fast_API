@@ -1,17 +1,37 @@
 from pydantic import BaseModel
+from typing import List
 
 
-class Item(BaseModel):
+class TodoItem(BaseModel):
     item: str
-    status: str
 
     model_config = {
         "json_schema_extra": {
             "examples": [
                 {
                     "item": "Read the next chapter of the book",
-                    "status": "successfully"
 
+                }
+            ]
+        }
+    }
+
+
+class TodoItems(BaseModel):
+    todos: List[TodoItem]
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "todos": [
+                        {
+                            "item": "Example schema 1!"
+                        },
+                        {
+                            "item": "Example schema 2!"
+                        }
+                    ]
                 }
             ]
         }
@@ -20,14 +40,14 @@ class Item(BaseModel):
 
 class Todo(BaseModel):
     id: int
-    item: Item
+    item: str
 
     model_config = {
         "json_schema_extra": {
             "examples": [
                 {
                     'id': 1,
-                    'item': Item,
+                    'item': "Example schema!",
                 }
             ]
         }
